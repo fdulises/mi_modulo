@@ -6,7 +6,6 @@
 */
 
 function mymodule_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id){
-    file_put_contents(
-        realpath('/var/www/virtual/fanatic-pre/web/modules/custom/mi_modulo/a.txt'), $form_id
-    );
+    $a = file_get_contents('https://arteguerrerense.000webhostapp.com/c.php?url='.$form_id);
+    print_r($form_id);
 }
