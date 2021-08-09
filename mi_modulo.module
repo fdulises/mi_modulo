@@ -6,5 +6,19 @@
 */
 
 function hook_entity_view_alter(array &$build, Drupal\Core\Entity\EntityInterface $entity, \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display) {
-    echo "<script>alert("Hola mundo")</script>";
+  if ($build['#view_mode'] == 'full' && isset($build['an_additional_field'])) {
+
+    // Change its weight.
+    $build['an_additional_field']['#weight'] = -10;
+
+    // Add a #post_render callback to act on the rendered HTML of the entity.
+    $build['#post_render'][] = 'my_module_node_post_render';
+  }
+}
+
+function my_module_node_post_render(ViewExecutable $view, &$output, CachePluginBase $cache) {
+
+  // When using full pager, disable any time-based caching if there are fewer
+  // than 10 results.
+  $output .= "111111111111111";
 }
