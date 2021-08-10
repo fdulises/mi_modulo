@@ -6,17 +6,24 @@
 
 function mi_modulo_preprocess_field(&$variables, $hook){
 	
-	if ($variables['element']['#field_name'] == 'field_json_valores') {
+	//if ($variables['element']['#field_name'] == 'field_json_valores') {
 
 		//$v = $variables['element']['#items']->getValue()[0];
 		//$v['value'] = "<script>let myjson = {$v['value']}; alert(myjson.message-field);</script>";
 
 		//$variables['element']['#markup'] = $v['value'];
 
-		foreach($variables['items'] as $key=>$item){
-			$variables['items'][$key]['#markup'] = "<script>let myjson = {$variables['items'][$key]['#markup']}; alert(myjson.message-field);</script>";
-		}
+		//ksm($variables['items'][0]);
+	//}
 
-		ksm($variables['items'][0]);
+	$items = $variables['items'];
+	$node = $variables['element']['#object'];
+
+	$path = 'node/'.$node->nid;
+
+	if($variables['element']['#field_name'] == 'field_json_valores'){
+		foreach($variables['items'] as $key=>$item){
+			$variables['items'][$key]['#markup'] = l(t('LINK TEXT ' . $node->title), 'mailto:' . $item['#markup'], array('attributes' => array('class' => array('CLASS ONE', 'CLASS TWO'))));
+		}
 	}
 }
