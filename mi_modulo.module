@@ -1,7 +1,7 @@
 <?php
 
 function mi_modulo_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
-  ksm($form);
+  ksm($form_state);
   if (isset($form['type']) && $form['type']['#value'] . '_node_settings' == $form_id) {
 
     $upload_enabled_types = \Drupal::config('mymodule.settings')
