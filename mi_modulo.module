@@ -8,8 +8,10 @@ function mi_modulo_preprocess_field(&$variables, $hook){
 	
 	if ($variables['element']['#field_name'] == 'field_json_valores') {
 
-		// $v = $variables['element']['#items']->getValue()[0];
-		// $v['value'] = "<script>let myjson = {$v['value']}; alert(myjson.message-field);</script>";
+		$v = $variables['element']['#items']->getValue()[0];
+		$v['value'] = "<script>let myjson = {$v['value']}; alert(myjson.message-field);</script>";
+
+		$variables['element']['#items']->setContext($v['value']);
 
 		// $variables["label"][0]["#context"]["value"] = $v['value'];
 
