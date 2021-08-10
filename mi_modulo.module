@@ -13,6 +13,6 @@ function mi_modulo_preprocess_field(&$variables, $hook){
 
 		$variables['element']['#markup'] = $v['value'];
 
-		ksm($variables['items']);
+		ksm($variables['items'][0]['content']);
 	}
 }
