@@ -1,24 +1,22 @@
 <?php
 
-/**
-* @file
-* Implement hook_form_alter().
-*/
+function mi_modulo_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  ksm($form);
+  if (isset($form['type']) && $form['type']['#value'] . '_node_settings' == $form_id) {
 
-function hook_entity_view_alter(array &$build, Drupal\Core\Entity\EntityInterface $entity, \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display) {
-  if ($build['#view_mode'] == 'full' && isset($build['an_additional_field'])) {
+    $upload_enabled_types = \Drupal::config('mymodule.settings')
+      ->get('upload_enabled_types');
+    $form['workflow']['upload_' . $form['type']['#value']] = [
+      '#type' => 'radios',
+      '#title' => t('Attachments'),
+      '#default_value' => in_array($form['type']['#value'], $upload_enabled_types) ? 1 : 0,
+      '#options' => [
+        t('Disabled'),
+        t('Enabled'),
+      ],
+    ];
 
-    // Change its weight.
-    $build['an_additional_field']['#weight'] = -10;
-
-    // Add a #post_render callback to act on the rendered HTML of the entity.
-    $build['#post_render'][] = 'my_module_node_post_render';
+    // Add a custom submit handler to save the array of types back to the config file.
+    $form['actions']['submit']['#submit'][] = 'mymodule_upload_enabled_types_submit';
   }
-}
-
-function my_module_node_post_render(ViewExecutable $view, &$output, CachePluginBase $cache) {
-
-  // When using full pager, disable any time-based caching if there are fewer
-  // than 10 results.
-  $output .= "111111111111111";
 }
