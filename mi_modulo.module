@@ -11,8 +11,8 @@ function mi_modulo_preprocess_field(&$variables, $hook){
 		$v = $variables['element']['#items']->getValue()[0];
 		$v['value'] = "<script>let myjson = {$v['value']}; alert(myjson.message-field);</script>";
 
-		$variables['element']['#items']->setValue([$v]);
+		$variables['element']['#markup'] = $v['value'];
 
-		ksm($variables['element']['#items']->getValue());
+		ksm($variables['items']);
 	}
 }
