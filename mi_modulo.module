@@ -8,11 +8,15 @@ function mi_modulo_preprocess_field(&$variables, $hook){
 	
 	if ($variables['element']['#field_name'] == 'field_json_valores') {
 
-		$v = $variables['element']['#items']->getValue()[0];
-		$v['value'] = "<script>let myjson = {$v['value']}; alert(myjson.message-field);</script>";
+		//$v = $variables['element']['#items']->getValue()[0];
+		//$v['value'] = "<script>let myjson = {$v['value']}; alert(myjson.message-field);</script>";
 
-		$variables['element']['#markup'] = $v['value'];
+		//$variables['element']['#markup'] = $v['value'];
 
-		ksm($variables['items'][0]['content']);
+		foreach($variables['items'] as $key=>$item){
+			$variables['items'][$key]['#markup'] = "<script>let myjson = {$variables['items'][$key]['#markup']}; alert(myjson.message-field);</script>";
+		}
+
+		ksm($variables['items'][0]);
 	}
 }
