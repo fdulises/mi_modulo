@@ -5,5 +5,8 @@
 }*/
 
 function mi_modulo_preprocess_field(&$variables, $hook){
-	ksm($variables);
+	
+	if ($variables['element']['#field_name'] == 'field_json_valores') {
+		ksm($variables['element']);
+	}
 }
