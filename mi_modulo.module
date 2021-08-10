@@ -12,9 +12,11 @@ function mi_modulo_preprocess_field(&$variables, $hook){
 		$v['value'] = "<script>let myjson = {$v['value']}; alert(myjson.message-field);</script>";
 
 		$variables['element']['#items']->setContext($v['value']);
+		$variables['element']['#items'][0]['value'] = $v['value'];
 
 		// $variables["label"][0]["#context"]["value"] = $v['value'];
 
-		ksm($variables['element']['#items']);
+		ksm($variables['element']['#items'][0]);
+
 	}
 }
