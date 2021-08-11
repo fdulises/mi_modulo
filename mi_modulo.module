@@ -28,5 +28,5 @@ function mi_modulo_entity_view_alter(
 ){
 	//hasField($field_name)
 
-	ksm($entity);
+	ksm($entity->entityTypeBundleInfo());
 }
