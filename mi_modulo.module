@@ -4,20 +4,27 @@
 	ksm($form_state);
 }*/
 
-function mi_modulo_preprocess_field(&$variables, $hook){
+// function mi_modulo_preprocess_field(&$variables, $hook){
 	
-	if ($variables['element']['#field_name'] == 'field_json_valores') {
+// 	if ($variables['element']['#field_name'] == 'field_json_valores') {
 
-		$v = $variables['element']['#items']->getValue();
-		$value = "<script>let myjson = {$v[0]['value']}; alert(myjson.message-field);</script>";
+// 		$v = $variables['element']['#items']->getValue();
+// 		$value = "<script>let myjson = {$v[0]['value']}; alert(myjson.message-field);</script>";
 
-		// $variables['element']['#items']->setContext($v);
-		//$variables['element']['#items']->set('value', $value);
+// 		// $variables['element']['#items']->setContext($v);
+// 		//$variables['element']['#items']->set('value', $value);
 
-		$variables['element']['#items']->get(0)->setValue('hola');
+// 		$variables['element']['#items']->get(0)->setValue('hola');
 
 
-		ksm($variables['element']['#items']);
+// 		ksm($variables['element']['#items']);
 
-	}
+// 	}
+// }
+
+function mi_modulo_paso_asistente_alter_view(
+	&$build,
+	Drupal\Core\Entity\EntityInterface $entity, \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display
+){
+	ksm($build);
 }
