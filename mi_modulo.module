@@ -22,8 +22,8 @@
 // 	}
 // }
 
-function mi_modulo_paso_asistente_alter_view(
-	&$build,
+function mi_modulo_entity_view_alter(
+	array &$build,
 	Drupal\Core\Entity\EntityInterface $entity, \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display
 ){
 	ksm($build);
