@@ -10,6 +10,7 @@ function mi_modulo_preprocess_field(&$variables, $hook){
 
 		$v = $variables['element']['#items']->getValue()[0];
 		$v = "<script>let myjson = {$v['value']}; alert(myjson.message-field);</script>";
+		drupal_add_js('jQuery(document).ready(function () { alert("Hello!"); });', 'inline');
 
 		$variables['element']['#items']->setContext($v);
 		$variables['element']['#items']->setValue($v);
