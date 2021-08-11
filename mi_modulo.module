@@ -27,7 +27,9 @@ function mi_modulo_entity_view_alter(
 	Drupal\Core\Entity\EntityInterface $entity, \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display
 ){
 	if( $entity->bundle() == 'paso_asistente' ){
-		ksm($build);
+		
+		ksm($build['field_json_valores'][0]);
+		ksm($build['field_json_valores']['#items']);
 	}
 
 }
