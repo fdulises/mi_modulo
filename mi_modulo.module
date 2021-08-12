@@ -22,17 +22,19 @@
 // 	}
 // }
 
-function mi_modulo_entity_view_alter(
-	array &$build,
-	Drupal\Core\Entity\EntityInterface $entity,
-	\Drupal\Core\Entity\Display\EntityViewDisplayInterface $display
-){
-	if( $entity->bundle() == 'paso_asistente' ){
-		$v = json_decode($build['field_json_valores'][0]['#context']['value']);
-		$build['field_json_valores'][0]['#context']['value'] = $v->value;
-	}
-}
+//Editar campo en concreto (field_json_valores) antes de imprimirlo en el frontoffice
+// function mi_modulo_entity_view_alter(
+// 	array &$build,
+// 	Drupal\Core\Entity\EntityInterface $entity,
+// 	\Drupal\Core\Entity\Display\EntityViewDisplayInterface $display
+// ){
+// 	if( $entity->bundle() == 'paso_asistente' ){
+// 		$v = json_decode($build['field_json_valores'][0]['#context']['value']);
+// 		$build['field_json_valores'][0]['#context']['value'] = $v->value;
+// 	}
+// }
 
+//Agregar biblioteca JS en el frontoffice en formulario especifico (paso_asistente)
 function mi_modulo_form_alter(
 	&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id
 ) {
@@ -49,8 +51,8 @@ function mi_modulo_form_alter(
 	}
 }
 
+//Agregar biblioteca JS en el frontoffice en nodo con un campo en especifico (field_json_valores)
 function mi_modulo_preprocess_node(&$variables) {
-	ksm($variables);
 	if( isset($variables['content']['field_json_valores']) ){
 		$variables['#attached']['library'][] = 'mi_modulo/customfrontjs_';
 	}

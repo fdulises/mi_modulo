@@ -13,15 +13,15 @@ const ploptions = {
     }
 };
 
-function pluginFieldFactory({type='textarea', value, description}){
+function pluginFieldFactory({plugin, value}){
     //Seleccionamos el contenedor del formulario
     let myform = document.querySelector('#node-paso-asistente-edit-form .layout-region-node-main');
 
     let mymensaje = `
     <div class="js-form-item form-item js-form-type-textarea form-type-textarea">
-        <label for="message_field">${description}</label>
+        <label for="myplugin_field">${plugin.description}</label>
         <div class="form-textarea-wrapper">
-        <textarea class="js-text-full text-full form-textarea resize-vertical" id="message_field" rows="5" cols="60" required>${value}</textarea>
+        <textarea class="js-text-full text-full form-textarea resize-vertical" id="myplugin_field" rows="5" cols="60" required>${value}</textarea>
         </div>
     </div>
     `;
@@ -32,9 +32,9 @@ function pluginFieldFactory({type='textarea', value, description}){
 
     myform.appendChild(div);
 
-    //Detectamos edición de message_field
-    document.querySelector('#message_field').addEventListener('change', e => {
-        document.querySelector('#edit-field-json-valores-0-value').value = JSON.stringify({ value: e.target.value });
+    //Detectamos edición de myplugin_field
+    document.querySelector('#myplugin_field').addEventListener('change', e => {
+        document.querySelector('#edit-field-json-valores-0-value').value = JSON.stringify({ value: e.target.value, plugin: plugin.id  });
     });
 
     return div;
@@ -59,9 +59,8 @@ window.addEventListener('load', ()=>{
 
     //Construimos e inyectamos campo personalizado
     pluginFieldFactory({
-        type: plugin_selected.type,
-        value: plugin_values.value,
-        description: plugin_selected.description
+        plugin: plugin_selected,
+        value: plugin_values.value
     });
 
     //Efectuamos cambio de componente al cambiar valor de select
@@ -74,14 +73,16 @@ window.addEventListener('load', ()=>{
         //Actualizamos datos por los del nuevo plugin
         edit_field_configuracion.value = JSON.stringify(plugin_selected);
 
+        //Detectamos edición de myplugin_field
+        edit_field_valores.value = JSON.stringify({ value: document.querySelector('#myplugin_field').value, plugin: plugin_selected.id });
+
         //Destruimos componente anterior
         document.querySelector('#mymensaje_cont').remove();
 
         //Construimos e inyectamos campo personalizado
         pluginFieldFactory({
-            type: plugin_selected.type,
-            value: plugin_values.value,
-            description: plugin_selected.description
+            plugin: plugin_selected,
+            value: plugin_values.value
         });
 
     });
