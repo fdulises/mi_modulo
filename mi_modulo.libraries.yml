@@ -1,0 +1,4 @@
+customjs_:
+  version: 1.x
+  js:
+    js/mi_modulo.js: {}
