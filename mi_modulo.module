@@ -1,0 +1,47 @@
+<?php
+
+/*function mi_modulo_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+	ksm($form_state);
+}*/
+
+// function mi_modulo_preprocess_field(&$variables, $hook){
+	
+// 	if ($variables['element']['#field_name'] == 'field_json_valores') {
+
+// 		$v = $variables['element']['#items']->getValue();
+// 		$value = "<script>let myjson = {$v[0]['value']}; alert(myjson.message-field);</script>";
+
+// 		// $variables['element']['#items']->setContext($v);
+// 		//$variables['element']['#items']->set('value', $value);
+
+// 		$variables['element']['#items']->get(0)->setValue('hola');
+
+
+// 		ksm($variables['element']['#items']);
+
+// 	}
+// }
+
+function mi_modulo_entity_view_alter(
+	array &$build,
+	Drupal\Core\Entity\EntityInterface $entity,
+	\Drupal\Core\Entity\Display\EntityViewDisplayInterface $display
+){
+	if( $entity->bundle() == 'paso_asistente' ){
+		$build['field_json_valores'][0]['#context']['value'] = 'Hola mundo';
+	}
+}
+
+function mi_modulo_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+	/* @var Drupal\Core\Entity\FieldableEntityInterface $entity */
+	$formObject = $form_state->getFormObject();
+	if ($formObject instanceof \Drupal\Core\Entity\EntityFormInterface) {
+		$entity = $formObject->getEntity();
+		if (
+			$entity->getEntityTypeId() === 'node'
+			&& in_array($entity->bundle(), ['paso_asistente'])
+		) {
+			$form['#attached']['library'][] = 'mi_modulo/customjs_';
+		}
+	}
+}
