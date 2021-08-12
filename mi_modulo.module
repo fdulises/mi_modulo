@@ -28,11 +28,14 @@ function mi_modulo_entity_view_alter(
 	\Drupal\Core\Entity\Display\EntityViewDisplayInterface $display
 ){
 	if( $entity->bundle() == 'paso_asistente' ){
-		$build['field_json_valores'][0]['#context']['value'] = 'Hola mundo';
+		$v = json_decode($build['field_json_valores'][0]['#context']['value']);
+		$build['field_json_valores'][0]['#context']['value'] = $v->value;
 	}
 }
 
-function mi_modulo_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+function mi_modulo_form_alter(
+	&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id
+) {
 	/* @var Drupal\Core\Entity\FieldableEntityInterface $entity */
 	$formObject = $form_state->getFormObject();
 	if ($formObject instanceof \Drupal\Core\Entity\EntityFormInterface) {
@@ -44,4 +47,12 @@ function mi_modulo_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form
 			$form['#attached']['library'][] = 'mi_modulo/customjs_';
 		}
 	}
+}
+
+function mi_modulo_preprocess_node(&$variables) {
+	ksm($variables);
+	if( isset($variables['content']['field_json_valores']) ){
+		$variables['#attached']['library'][] = 'mi_modulo/customfrontjs_';
+	}
+
 }
