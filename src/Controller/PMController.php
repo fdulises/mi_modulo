@@ -10,8 +10,18 @@ use Drupal\Core\Controller\ControllerBase;
 use Symfony\Component\HttpFoundation\Response;
 
 class PMController extends ControllerBase {
-  public function content($nombre, $tipo) {
-    var_dump($nombre);
-    return new Response('<html><div>custom cont</div></html>');
-  }
+	public function content($nombre, $tipo) {
+		if( $tipo == 'js' ){
+			$file = realpath(__DIR__.'/../../pm/mensaje/mensaje.back.js');
+			$content = file_get_contents( $file );
+			return new Response($content);
+		}else if( $tipo == 'php' ){
+			$file = realpath(__DIR__.'/../../pm/mensaje/mensaje.back.php');
+			require $file;
+
+			return new Response(main());
+
+		}
+		return new Response(':)');
+	}
 }
