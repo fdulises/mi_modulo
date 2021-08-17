@@ -1,0 +1,4 @@
+mi_modulo.content:
+  path: '/pm/{nombre}/{tipo}'
+  defaults:
+    _controller: 'Drupal\mi_modulo\Controller\PMController::content'
