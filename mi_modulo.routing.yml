@@ -1,12 +1,12 @@
-mi_modulo.content:
-  path: '/pm/{nombre}/{tipo}'
+mi_modulo.script:
+  path: '/pm/script/{nombre}'
   defaults:
-    _controller: 'Drupal\mi_modulo\Controller\PMController::content'
+    _controller: 'Drupal\mi_modulo\Controller\PMController::script'
   requirements:
     _permission: 'access content'
-mi_modulo.renderpaso:
-  path: '/renderpaso'
+mi_modulo.form:
+  path: '/pm/form/{nodo}'
   defaults:
-    _controller: 'Drupal\mi_modulo\Controller\render_paso::content'
+    _controller: 'Drupal\mi_modulo\Controller\PMController::form'
   requirements:
     _permission: 'access content'

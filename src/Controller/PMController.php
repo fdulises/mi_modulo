@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Contains \Drupal\hello\Controller\HelloController.
+ * Contains \Drupal\mi_modulo\Controller\PMController.
  */
 namespace Drupal\mi_modulo\Controller;
 
@@ -10,23 +10,27 @@ use Drupal\Core\Controller\ControllerBase;
 use Symfony\Component\HttpFoundation\Response;
 
 class PMController extends ControllerBase {
-	public function content($nombre, $tipo) {
+	/*
+	* Controlador para ruta pm/script/nombre
+	* Responde con el javascript para backend del plugin solicitado
+	*/
+	public function script($nombre) {
 		
-		if( $tipo == 'js' ){
-			$file = realpath(__DIR__.'/../../pm/mensaje/mensaje.back.js');
-			$content = file_get_contents( $file );
+		$file = realpath(__DIR__."/../../pm/{$nombre}/back.js");
+		$content = file_get_contents( $file );
 
-			$response = new Response($content);
-			$response->headers->set('Content-Type', 'application/javascript');
+		$response = new Response($content);
+		$response->headers->set('Content-Type', 'application/javascript');
 
-			return $response;
-		}else if( $tipo == 'php' ){
-			$file = realpath(__DIR__.'/../../pm/mensaje/mensaje.back.php');
-			require $file;
+		return $response;
+	}
 
-			return new Response(main());
-
-		}
-		return new Response(':)');
+	/*
+	* Controlador para ruta pm/form/nodo
+	* Responde con el render del form solicitado
+	*/
+	public function form($nodo) {
+		$form = \Drupal::formBuilder()->getForm(\Drupal\mi_modulo\form\render_form::class);
+		return $form;
 	}
 }

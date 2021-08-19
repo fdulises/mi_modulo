@@ -34,19 +34,19 @@
 // }
 
 //Editar campo en concreto (field_json_valores) antes de imprimirlo en el frontoffice
-function mi_modulo_entity_view_alter(
-	array &$build,
-	Drupal\Core\Entity\EntityInterface $entity,
-	\Drupal\Core\Entity\Display\EntityViewDisplayInterface $display
-){
-	if( $entity->bundle() == 'paso_asistente' ){
-		// $v = json_decode($build['field_json_valores'][0]['#context']['value']);
-		// $build['field_json_valores'][0]['#context']['value'] = $v->value;
+// function mi_modulo_entity_view_alter(
+// 	array &$build,
+// 	Drupal\Core\Entity\EntityInterface $entity,
+// 	\Drupal\Core\Entity\Display\EntityViewDisplayInterface $display
+// ){
+// 	if( $entity->bundle() == 'paso_asistente' ){
+// 		// $v = json_decode($build['field_json_valores'][0]['#context']['value']);
+// 		// $build['field_json_valores'][0]['#context']['value'] = $v->value;
 
-		ksm($build);
-	}
+// 		ksm($build);
+// 	}
 
-}
+// }
 
 //Agregar biblioteca JS en el frontoffice en formulario especifico (paso_asistente)
 function mi_modulo_form_alter(

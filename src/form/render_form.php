@@ -51,35 +51,11 @@ class render_form extends FormBase {
       '#required' => TRUE,
     ];
 
-
-    $form['title2'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('Title2'),
-      '#description' => $this->t('1111111111111 Enter the title of the book. Note that the title must be at least 10 characters in length asdfasdfasdfasdf.'),
-      '#required' => TRUE,
-    ];
-
-
-    $form['title3'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('Title2asdfsda'),
-      '#description' => $this->t('1111111111111 Enter the title of the book. Note that the title must be at least 10 characters in lengasdf asdf asdfth asdfasdfasdfasdf.'),
-      '#required' => TRUE,
-    ];
-  
-
     $form['accept'] = [
       '#type' => 'checkbox',
       '#title' => $this
         ->t('I accept the terms of use of the site'),
       '#description' => $this->t('Please read and accept the terms of use'),
-    ];
-
-    $form['accept2'] = [
-      '#type' => 'checkbox',
-      '#title' => $this
-        ->t('otro checkbox'),
-      '#description' => $this->t('Please read and accept the terms of use 11111111111'),
     ];
 
     // Group submit handlers in an actions element with a key of "actions" so
