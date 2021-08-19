@@ -2,3 +2,11 @@ mi_modulo.content:
   path: '/pm/{nombre}/{tipo}'
   defaults:
     _controller: 'Drupal\mi_modulo\Controller\PMController::content'
+  requirements:
+    _permission: 'access content'
+mi_modulo.renderpaso:
+  path: '/renderpaso'
+  defaults:
+    _controller: 'Drupal\mi_modulo\Controller\render_paso::content'
+  requirements:
+    _permission: 'access content'
